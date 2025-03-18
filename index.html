@@ -24,7 +24,9 @@
     <header> 
 
         <nav class="w-11/12 mx-auto flex justify-between border-b-2 py-5 border-[#17171720]">
-            <div class ="logo"><img class="w-[120px]" src="ph-tube-resources/Logo.png" alt=""></div>
+            <div class ="logo">
+              <img class="w-[120px]" src="ph-tube-resources/Logo.png" alt="">
+            </div>
             <div class="Sort"><button class="btn">Sort by View</button></div>
 
             <div" class="blogs"><button class="btn bg-red-600 text-white" > Blogs</button></div>
@@ -34,7 +36,9 @@
     </header>
 
     <nav id="category-container" class=" flex py-5 justify-center gap-5"> 
- <div> <button id="btn-all"  onclick="loadVideos()" class="btn btn-sm  text-white "> All </button></div>
+ <div>
+   <button id="btn-all"  onclick="loadVideos()" class="btn btn-sm  text-white"> All </button>
+</div>
     </nav>
 <!-- video container section -->
  <!-- Oops!! Sorry, There is no content here -->
@@ -45,36 +49,27 @@
     <img class="w-[120px]" src="img/Icon.png" alt=""> 
     <h2 class="font-bold">Oops!! Sorry, There is no content here</h2>
    </div>
+  </section>
+<!--  -->
+<!-- Modal area -->
+<!-- Open the modal using ID.showModal() method -->
+<!-- <button class="btn" onclick="my_modal_1.showModal()">open modal
 
-    <!-- <div class="card bg-base-100 gap-5">
-        <figure class="relative">
-          <img
-            src="https://i.ibb.co/QPNzYVy/moonlight.jpg"
-            alt="Shoes" />
-            <span class="absolute  bottom-2 right-2 text-white bg-black p-2 text-sm rounded"> 3hrs 56 min ago</span>
-        </figure>
-        <div class="flex gap-3 px-0">
+</button> -->
 
-<div class="profile ">
-     <div class="avatar">
-    <div class="ring-primary ring-offset-base-100 w-6  rounded-full ring ring-offset-2">
-      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+<dialog id="video_details" class="modal">
+  <div class="modal-box">
+    <div id="details_container">
+      
     </div>
-  </div></div>
-<div class="intro">
-<h2 class="text-sm font-semibold">Midnight Serenade</h2>    
-<p class="text-sm text-gray-400 flex gap-2">Awlad Hossain <img class="w-6" src="https://img.icons8.com/?size=48&id=FNbnqlDTjR45&format=gif" alt=""> </p>
-<p class="text-sm text-gray-400"> 91K views</p>
-</div>
-        </div>
-      </div> -->
-
-</section>
-
-
-
-
-
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 
 
 

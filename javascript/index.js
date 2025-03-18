@@ -1,5 +1,9 @@
 // https://openapi.programming-hero.com/api/phero-tube/categories
 
+window.aaaf = function() {
+  alert("Button Clicked!")
+}
+
 console.log("INdex is connected");
 
 function removeActiveClass() {   
@@ -19,15 +23,14 @@ fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
 
 
 };
-///category: "Music"category_id: "1001"[[Prototype]]: Object
-// index.js:21 {category_id: '1003', category: 'Comedy'}
-// index.js:21 {category_id: '1005', category: 'Drawing'}
 
 function loadVideos() {
   fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
   .then((response) => response.json())
   .then((data)=> disPlayVideos(data.videos))
 }
+
+
 
 function loadCategoryVideos(id) {
 console.log(id);
@@ -45,6 +48,72 @@ fetch(url)
 })
 
 }
+const loadVideoDetails=(videoId)=>{
+  console.log(videoId)
+  const url = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
+  fetch(url)
+  .then((res)=> res.json())
+  .then((data)=> disPlayVideosDetails(data.video));
+} ;
+
+const disPlayVideosDetails=(video) => {
+  console.log(video);
+  document.getElementById("video_details").showModal()
+  const detailsContainer= document.getElementById("details_container");
+
+  detailsContainer.innerHTML = `
+<div class="card bg-base-100 image-full shadow-sm">
+  <figure>
+    <img
+      src="${video.thumbnail}"
+      alt="Shoes" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title"> ${video.title}</h2>
+    <p class=""> ${video.description}</p>
+    <h2 class="font-bold text-sky-400" > category id is ${video.video_id} </h2>
+    <h2 class=" font-bold">  video is ${video.category_id} </h2>
+     <div class="card-actions justify-end">
+    </div> 
+  </div>
+</div>
+
+
+
+
+  `
+  
+
+} 
+/**
+ * 
+ * authors
+: 
+[{…}]
+category_id
+: 
+"1001"
+description
+: 
+"'Midnight Serenade' by Noah Walker is a soulful journey into the depths of the night, capturing the mystique and allure of a moonlit evening. With 543K views, this song brings together tender melodies and evocative lyrics, making it a favorite among listeners seeking a contemplative yet uplifting experience. Immerse yourself in this musical masterpiece and feel the calm embrace of the night."
+others
+: 
+{views: '543K', posted_date: ''}
+thumbnail
+: 
+"https://i.ibb.co/QPNzYVy/moonlight.jpg"
+title
+: 
+"Midnight Serenade"
+video_id
+: 
+"aaab"
+[[Prototype]]
+: 
+Object
+ * 
+ *  
+ */
 
 function disPlayCategories(categories) {
   
@@ -130,17 +199,19 @@ videoCard.innerHTML= `
     <div class="ring-primary ring-offset-base-100 w-6 rounded-full ring ring-offset-2">
       <img src="${video.authors[0].profile_picture}" />
     </div>
-  </div></div>
+  </div>
+  </div>
 <div class="intro">
 <h2 class="text-sm font-semibold">Midnight Serenade</h2>    
 <p class="text-sm text-gray-400 flex gap-2"> ${video.authors[0].profile_name} <img class="w-5" src="https://img.icons8.com/?size=48&id=FNbnqlDTjR45&format=gif" alt=""> </p>
 <p class="text-sm text-gray-400">${video.others.views}</p>
 </div>
         </div>
+        <button onclick=loadVideoDetails("${video.video_id}") class="btn btn-block">Show Details</button>
       </div>
-
-
 `;
+
+
 videoContainer.append(videoCard)
 
 });
