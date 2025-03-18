@@ -2,6 +2,15 @@
 
 console.log("INdex is connected");
 
+function removeActiveClass() {   
+  const activeButtons = document.getElementsByClassName("active");
+  
+  for(let btn of activeButtons) {
+    btn.classList.remove("active")
+  }
+    // console.log(activeButtons);
+       }
+
 // created a function 
 function loadCategories() {
 fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -26,7 +35,14 @@ const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
 
 fetch(url)
 .then((res)=> res.json())
-.then((data)=> disPlayVideos(data.category))
+.then((data)=> {
+  removeActiveClass();
+  
+  const clickedButton = document.getElementById(`btn-${id}`)
+  clickedButton.classList.add("active")
+  disPlayVideos(data.category)
+
+})
 
 }
 
@@ -39,7 +55,7 @@ function disPlayCategories(categories) {
     // console.log(cat);
     const categoryDiv = document.createElement("div");
     categoryDiv.innerHTML=`
-    <button onclick="loadCategoryVideos(${cat.category_id})" class="btn btn-sm hover:bg-red-500 hover:text-white"> ${cat.category} </button>
+    <button id= "btn-${cat.category_id}" onclick="loadCategoryVideos(${cat.category_id})" class="btn btn-sm hover:bg-red-500 hover:text-white"> ${cat.category} </button>
     `;
     categoryContainer.append(categoryDiv)
   }
@@ -81,7 +97,18 @@ Object
 
 const disPlayVideos=(videos)=> {
   const videoContainer = document.getElementById("video-container");
-videoContainer.innerHTML = ""
+videoContainer.innerHTML = "";
+
+if(videos.length === 0) {
+  videoContainer.innerHTML = `
+   <div class="col-span-full flex flex-col justify-center items-center py-20 text-center">
+    <img class="w-[120px]" src="img/Icon.png" alt=""> 
+    <h2 class="font-bold">Oops!! Sorry, There is no content here</h2>
+   </div>
+
+  `
+  return;
+} 
 
   videos.forEach(video => {
     // create element 
