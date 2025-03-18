@@ -71,8 +71,8 @@ const disPlayVideosDetails=(video) => {
   <div class="card-body">
     <h2 class="card-title"> ${video.title}</h2>
     <p class=""> ${video.description}</p>
-    <h2 class="font-bold text-sky-400" > category id is ${video.video_id} </h2>
-    <h2 class=" font-bold">  video is ${video.category_id} </h2>
+    <h2 class="font-bold text-sky-400" > Category id is ${video.video_id} </h2>
+    <h2 class=" font-bold">  Video id is ${video.category_id} </h2>
      <div class="card-actions justify-end">
     </div> 
   </div>
@@ -186,6 +186,7 @@ if(videos.length === 0) {
 const videoCard = document.createElement("div")
 videoCard.innerHTML= `
 
+
  <div class="card bg-base-100 gap-5">
         <figure class="relative">
           <img class="w-full h-[150px] object-cover"
@@ -207,8 +208,9 @@ videoCard.innerHTML= `
 <p class="text-sm text-gray-400">${video.others.views}</p>
 </div>
         </div>
-        <button onclick=loadVideoDetails("${video.video_id}") class="btn btn-block">Show Details</button>
+       <div class="lg:py-0 py-4 ">  <button onclick=loadVideoDetails("${video.video_id}") class="btn btn-block bg-gray-100 font-bold ">Show Details</button> </div>
       </div>
+
 `;
 
 
