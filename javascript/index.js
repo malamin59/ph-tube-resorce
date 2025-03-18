@@ -24,8 +24,8 @@ fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
 
 };
 
-function loadVideos() {
-  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+function loadVideos(searchText = "") {
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
   .then((response) => response.json())
   .then((data)=> disPlayVideos(data.videos))
 }
@@ -128,37 +128,6 @@ function disPlayCategories(categories) {
     `;
     categoryContainer.append(categoryDiv)
   }
-  
-
-/**
- * {category_id: '1001', video_id: 'aaal', thumbnail: 'https://i.ibb.co/hdtZYbB/enchnting.jpg', title: 'Enchanted Harmonies', authors: Array(1), …}
-authors
-: 
-[{…}]
-category_id
-: 
-"1001"
-description
-: 
-"'Enchanted Harmonies' by Sophia Williams enchants listeners with its delicate, soothing sounds and melodic complexity. Garnering 7.6K views, this piece is perfect for those seeking an immersive musical experience that blends elegance with emotion, offering a unique soundscape that resonates deeply with its audience."
-others
-: 
-{views: '7.6K', posted_date: '16450'}
-thumbnail
-: 
-"https://i.ibb.co/hdtZYbB/enchnting.jpg"
-title
-: 
-"Enchanted Harmonies"
-video_id
-: 
-"aaal"
-[[Prototype]]
-: 
-Object
-* 
-* 
-*/
 
 }
 
@@ -204,7 +173,11 @@ videoCard.innerHTML= `
   </div>
 <div class="intro">
 <h2 class="text-sm font-semibold">Midnight Serenade</h2>    
-<p class="text-sm text-gray-400 flex gap-2"> ${video.authors[0].profile_name} <img class="w-5" src="https://img.icons8.com/?size=48&id=FNbnqlDTjR45&format=gif" alt=""> </p>
+<p class="text-sm text-gray-400 flex gap-2"> ${video.authors[0].profile_name} 
+ ${video.authors[0].verified == true ? `<img class="w-5" src="https://img.icons8.com/?size=48&id=FNbnqlDTjR45&format=gif" alt=""> </p>
+`: 
+
+``}
 <p class="text-sm text-gray-400">${video.others.views}</p>
 </div>
         </div>
@@ -218,8 +191,13 @@ videoContainer.append(videoCard)
 
 });
 
-}
+};
 
+document.getElementById("search-input").addEventListener("keyup", (e)=>{
+
+  const input = e.target.value;
+loadVideos(input)
+})
 
 
 loadCategories();
