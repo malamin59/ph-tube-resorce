@@ -1,10 +1,19 @@
 // https://openapi.programming-hero.com/api/phero-tube/categories
 
-window.aaaf = function() {
-  alert("Button Clicked!")
-}
+// window.aaaf = function() {
+//   alert("Button Clicked!")
+// }
 
 console.log("INdex is connected");
+
+const showLoader=()=> {
+document.getElementById("loader").classList.remove("hidden")
+document.getElementById("video_details").classList.add("hidden")
+} 
+const hideLoader=()=> {
+document.getElementById("loader").classList.add("hidden")
+document.getElementById("video_details").classList.remove("hidden")
+} 
 
 function removeActiveClass() {   
   const activeButtons = document.getElementsByClassName("active");
@@ -25,6 +34,7 @@ fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
 };
 
 function loadVideos(searchText = "") {
+  showLoader()
   fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
   .then((response) => response.json())
   .then((data)=> disPlayVideos(data.videos))
@@ -33,6 +43,7 @@ function loadVideos(searchText = "") {
 
 
 function loadCategoryVideos(id) {
+  showLoader()
 console.log(id);
 const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
 
@@ -145,6 +156,7 @@ if(videos.length === 0) {
    </div>
 
   `
+  hideLoader()
   return;
 } 
 
@@ -181,7 +193,9 @@ videoCard.innerHTML= `
 <p class="text-sm text-gray-400">${video.others.views}</p>
 </div>
         </div>
-       <div class="lg:py-0 py-4 ">  <button onclick=loadVideoDetails("${video.video_id}") class="btn btn-block bg-gray-100 font-bold ">Show Details</button> </div>
+       <div class="lg:py-0 py-4 "> 
+        <button onclick=loadVideoDetails("${video.video_id}") class="btn btn-block bg-gray-100 font-bold ">Show Details</button>
+        </div>
       </div>
 
 `;
@@ -189,7 +203,10 @@ videoCard.innerHTML= `
 
 videoContainer.append(videoCard)
 
+
+
 });
+hideLoader()
 
 };
 
